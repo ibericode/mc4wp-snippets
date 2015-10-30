@@ -1,0 +1,1 @@
+### Snippets specific to [MailChimp User Sync](https://mc4wp.com/add-ons/mailchimp-sync/)
