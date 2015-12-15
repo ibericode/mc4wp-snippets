@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Create a user whenever a form is created with success
+ * Create a user whenever a form is submitted with success
  *
  * @param MC4WP_Form $form
  */
@@ -12,7 +12,10 @@ add_action( 'mc4wp_form_subscribed', function( MC4WP_Form $form ) {
 		return;
 	}
 
+	// use email as username
 	$username = $form->data['EMAIL'];
+
+	// generate a random password
 	$password = wp_generate_password();
 
 	// try to create the user (or error when user already exists)
