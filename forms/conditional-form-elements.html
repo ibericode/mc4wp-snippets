@@ -1,0 +1,40 @@
+<!-- 1. Add the following JavaScript to your theme or to the bottom of your form mark-up. -->
+<script type="text/javascript">
+    var optionalInputs = document.querySelectorAll('[data-depends-on]');
+    [].forEach.call(optionalInputs, function(el) {
+        var condition = el.getAttribute('data-depends-on').split(':');
+        var field = document.querySelector('[name="' + condition[0] + '"]');
+        var expectedValue = condition[1] || "";
+
+        if(field) {
+            callback = showIf(el, expectedValue);
+            field.addEventListener('change', callback);
+            field.addEventListener('keyup', callback);
+            callback.call(field);
+        }
+    });
+
+    function showIf(el, expectedValue ) {
+        return function() {
+            var conditionMet = ( expectedValue.length > 0 && this.value === expectedValue ) || ( expectedValue === "" && this.value.length > 0 );
+            el.style.display = ( conditionMet ) ? '' : 'none';
+        }
+    }
+</script>
+
+<!-- 2. You can now add data-depends-on to your conditional elements -->
+<p>
+    <label>Dropdown Group</label>
+    <select name="FOO">
+        <option value="yes">Yes</option>
+        <option value="no" selected>No</option>
+    </select>
+</p>
+
+<div data-depends-on="FOO:yes">
+    Some text which will only appear if you selected "yes".
+</div>
+
+<div data-depends-on="EMAIL">
+    Some text which will only appear if email field is filled.
+</div>
