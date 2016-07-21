@@ -36,10 +36,6 @@ add_filter( 'mc4wp_merge_vars', function( $data ) {
 		$data['GROUPINGS'] = array();
 	}
 
-	$data['GROUPINGS'][] = array(
-		'id' => 'grouping-id',
-		'groups' => array( 'Subscriber' )
-	);
-
+	$data['GROUPINGS']['grouping-id'] = array( 'Subscriber' );
 	return $data;
 });
