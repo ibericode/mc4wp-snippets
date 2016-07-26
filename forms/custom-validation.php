@@ -31,7 +31,9 @@ add_filter( 'mc4wp_form_errors', function( array $errors, MC4WP_Form $form ) {
  */
 add_filter( 'mc4wp_form_errors', function( array $errors, MC4WP_Form $form ) {
 
-	if( $form->data['SOME_FIELD'] !== 'Some value' ) {
+    $data = $form->get_data();
+
+	if( $data['SOME_FIELD'] !== 'Some value' ) {
 		$errors[] = 'incorrect_value';
 	}
 

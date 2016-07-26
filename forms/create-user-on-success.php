@@ -12,8 +12,11 @@ add_action( 'mc4wp_form_subscribed', function( MC4WP_Form $form ) {
 		return;
 	}
 
+	// get form data
+	$data = $form->get_data();
+
 	// use email as username
-	$username = $form->data['EMAIL'];
+	$username = $data['EMAIL'];
 
 	// generate a random password
 	$password = wp_generate_password();
