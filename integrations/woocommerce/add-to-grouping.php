@@ -1,19 +1,12 @@
 <?php
 
-add_filter( 'mc4wp_integration_woocommerce_merge_vars', function( $merge_vars ) {
+add_filter( 'mc4wp_integration_woocommerce_subscriber_data', function( MC4WP_MailChimp_Subscriber $subscriber ) {
+    // replace "interest-id" with the actual ID of your interest.
+    $subscriber->interests[ "interest-id" ] = true;
 
-    // The ID of the interest category / grouping
-    $grouping_id = 4605;
+    // repeat for all interests you want to enable or disable
+    // $subscriber->interests[ "91lxm10xzl" ] = true;
+    // $subscriber->interests[ "91lxm10xzl" ] = false;
 
-    // The groups to add to (full name, should match exactly)
-    $groups = array( "Group name 1", "Group Name 2" );
-
-    // init empty array as GROUPINGS key
-    if( ! isset( $merge_vars['GROUPINGS'] ) ) {
-        $merge_vars['GROUPINGS'] = array();
-    }
-
-    // add grouping + groups info
-    $merge_vars['GROUPINGS'][ $grouping_id ] = $groups;
-    return $merge_vars;
+    return $subscriber;
 });
