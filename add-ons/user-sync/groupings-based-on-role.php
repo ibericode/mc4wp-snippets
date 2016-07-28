@@ -2,23 +2,18 @@
 
 
 /**
- * Add users with the "subscriber" role to a group called "Member"
- *
- * All other roles: add to "Paused"
+ * Add or remove users with the "subscriber" role to a group called "Member"
  */
-add_filter( 'mailchimp_sync_user_data', function( $data, $user ) {
-	// determine status
-	$status = in_array( 'subscriber', $user->roles ) ? "Member" : "Paused";
+add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
 
-	$grouping_info = array(
-		'id' => 'grouping-id',
-		'groups' => array( $status )
-	);
+    // toggle interest ID based on user role
+    if( in_array( 'subscriber', $user->roles ) ) {
+        $subscriber->interests[ "interest-id-members" ] = true;
+    } else {
+        $subscriber->interests[ "interest-id-members" ] = false;
+    }
 
-	// add grouping info to data
-	$data['GROUPINGS'] = array( $grouping_info );
-
-	return $data;
+	return $subscriber;
 }, 10, 2 );
 
 /**
