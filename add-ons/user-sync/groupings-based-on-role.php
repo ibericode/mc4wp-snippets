@@ -22,20 +22,19 @@ add_filter( 'mailchimp_sync_user_data', function( $data, $user ) {
 }, 10, 2 );
 
 /**
- *  Add guest visitors using a form or checkbox to the "Subscriber" group
+ * @param MC4WP_MailChimp_Subscriber $subscriber
+ * @return MC4WP_MailChimp_Subscriber
  */
-add_filter( 'mc4wp_merge_vars', function( $data ) {
+function myprefix_add_guests_to_interest( $subscriber ) {
+    // do nothing if user is logged in
+    if( is_user_logged_in() ) {
+        return $subscriber;
+    }
 
-	// do nothing if user is logged in (Sync takes care of that)
-	if( is_user_logged_in() ) {
-		return $data;
-	}
+    // toggle the interest here, by ID.
+    // you can find this ID by going to MailChimp for WP > MailChimp > List Overview
+    $subscriber->interests[ "interest-id" ] = true;
+    return $subscriber;
+}
 
-	// otherwise, add to "Subscriber" group
-	if( ! isset( $data['GROUPINGS'] ) ) {
-		$data['GROUPINGS'] = array();
-	}
-
-	$data['GROUPINGS']['grouping-id'] = array( 'Subscriber' );
-	return $data;
-});
+add_filter( 'mc4wp_subscriber_data', 'myprefix_add_guests_to_interest' );
