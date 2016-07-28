@@ -19,4 +19,4 @@ function myprefix_send_additional_field( array $merge_vars, MC4WP_Form $form ) {
 	return $merge_vars;
 }
 
-add_filter( 'mc4wp_form_merge_vars', 'myprefix_send_additional_field', 10, 2 );
+add_filter( 'mc4wp_form_data', 'myprefix_send_additional_field', 10, 2 );

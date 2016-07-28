@@ -21,4 +21,4 @@ function myprefix_combine_fields( $merge_vars, MC4WP_Form $form ) {
 	return $merge_vars;
 }
 
-add_filter( 'mc4wp_form_merge_vars', 'myprefix_combine_fields', 10, 2 );
+add_filter( 'mc4wp_form_data', 'myprefix_combine_fields', 10, 2 );

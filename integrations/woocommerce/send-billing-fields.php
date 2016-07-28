@@ -14,21 +14,20 @@
  *
  * @return array
  */
-add_filter( 'mc4wp_merge_vars', function( $merge_vars ) {
+add_filter( 'mc4wp_integration_woocommerce_data', function( $data ) {
 
+    // map of WooCommerce checkout field names => MailChimp field names
 	$field_map = array(
 		'billing_country' => 'COUNTRY',
 		'billing_phone' => 'PHONE',
 	);
 
 	foreach( $field_map as $woocommerce_field => $mailchimp_field ) {
-
 		if( ! empty( $_POST[ $woocommerce_field ] ) ) {
-			$merge_vars[ $mailchimp_field ] = sanitize_text_field( $_POST[ $woocommerce_field ] );
+			$data[ $mailchimp_field ] = sanitize_text_field( $_POST[ $woocommerce_field ] );
 		}
-
 	}
 
 
-	return $merge_vars;
+	return $data;
 } );

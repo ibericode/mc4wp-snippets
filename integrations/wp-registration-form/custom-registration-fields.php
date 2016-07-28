@@ -23,14 +23,19 @@ add_action( 'register_form', function() {
 /**
  * Register the custom fields with MailChimp for WordPress.
  */
-add_filter( 'mc4wp_user_merge_vars', function( $merge_vars, $user ) {
+add_filter( 'mc4wp_integration_data', function( $data ) {
 
-	$field_names = array( 'TELEPHONE', 'WEBSITE', 'STORENAME' );
+	$field_names = array(
+		'TELEPHONE',
+		'WEBSITE',
+		'STORENAME'
+	);
+
 	foreach( $field_names as $field_name ) {
 		if( ! empty( $_POST[ $field_name ] ) ) {
-			$merge_vars[ $field_name ] = sanitize_text_field( $_POST[ $field_name ] );
+			$data[ $field_name ] = sanitize_text_field( $_POST[ $field_name ] );
 		}
 	}
 
-	return $merge_vars;
-}, 10, 2 );
+	return $data;
+});
