@@ -13,7 +13,7 @@ add_action( 'mctb_before_submit_button', function() {
  *
  * @param array $vars
  */
-add_filter( 'mctb_merge_vars', function( $vars ) {
+add_filter( 'mctb_data', function( $vars ) {
 	$vars['NAME'] = ( isset( $_POST['NAME'] ) ) ? sanitize_text_field( $_POST['NAME'] ) : '';
 	return $vars;
 });

@@ -3,20 +3,20 @@
 /**
  * Programmatically adds another field to be sent to MailChimp.
  *
- * @param array      $merge_vars
+ * @param array      $data
  * @param MC4WP_Form $form
  *
  * @return array
  */
-function myprefix_send_additional_field( array $merge_vars, MC4WP_Form $form ) {
+function myprefix_send_additional_field( array $data, MC4WP_Form $form ) {
 
 	// a static field
-	$merge_vars['MY_FIELD'] = 'Some value';
+    $data['MY_FIELD'] = 'Some value';
 
-	// the name of the form
-	$merge_vars['FORM'] = $form->name;
+	// add the name of the form used
+    $data['FORM'] = $form->name;
 
-	return $merge_vars;
+	return $data;
 }
 
 add_filter( 'mc4wp_form_data', 'myprefix_send_additional_field', 10, 2 );

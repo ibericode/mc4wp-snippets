@@ -3,22 +3,22 @@
 /**
  * Combine the values of "FIELD_ONE" and "FIELD_TWO" into a single "COMBINED_FIELD" field.
  *
- * @param array $merge_vars
+ * @param array $data
  * @param MC4WP_Form $form
  *
  * @return array
  */
-function myprefix_combine_fields( $merge_vars, MC4WP_Form $form ) {
+function myprefix_combine_fields( $data, MC4WP_Form $form ) {
 
 	// get values for both fields
-	$field1 = ( isset( $merge_vars['FIELD_ONE'] ) ) ? $merge_vars['FIELD_ONE'] : '';
-	$field2 = ( isset( $merge_vars['FIELD_TWO'] ) ) ? $merge_vars['FIELD_TWO'] : '';
+	$field1 = ( isset( $data['FIELD_ONE'] ) ) ? $data['FIELD_ONE'] : '';
+	$field2 = ( isset( $data['FIELD_TWO'] ) ) ? $data['FIELD_TWO'] : '';
 
 	// merge the two fields into one
-	$merge_vars['COMBINED_FIELD'] = $field1 . ' ' . $field2;
+    $data['COMBINED_FIELD'] = $field1 . ' ' . $field2;
 
 	// return customized data
-	return $merge_vars;
+	return $data;
 }
 
 add_filter( 'mc4wp_form_data', 'myprefix_combine_fields', 10, 2 );
