@@ -17,6 +17,9 @@ add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
 }, 10, 2 );
 
 /**
+ * A simple example how to include your own function in a Wordpress theme for setting Interest group. 
+ * The code below is not needed for the code above to work. 
+ * 
  * @param MC4WP_MailChimp_Subscriber $subscriber
  * @return MC4WP_MailChimp_Subscriber
  */
