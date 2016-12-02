@@ -12,3 +12,4 @@ add_action( 'mc4wp_integration_subscribed', function( $integration, $email_addre
     // send the email
     wp_mail( $email_to, $email_subject, $email_message );
 }, 10, 3 );
+
