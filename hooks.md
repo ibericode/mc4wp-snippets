@@ -20,6 +20,13 @@ mc4wp_output_form
 mc4wp_save_form
 ```
 
+**Example action usage**
+```php
+add_action( 'mc4wp_form_subscribed', function() {
+   // do something
+});
+```
+
 # Filter hooks
 
 ```
@@ -58,4 +65,12 @@ mc4wp_subscriber_count
 mc4wp_subscriber_data
 mc4wp_user_merge_vars
 mc4wp_use_sslverify
+```
+
+**Example filter usage**
+```php
+add_filter( 'mc4wp_form_content', function( $content ) {
+    $addition = 'Some text at the end of every form.';
+   return $content . $addition;
+});
 ```
