@@ -13,6 +13,8 @@ add_filter( 'mc4wp_ecommerce_order_data', function( $data, $woocommerce_order ) 
         }
     }
 
+    // reset array because MailChimp API expects an array type.
+    $data['lines'] = (array) $data['lines'];
 
    return $data;
 });
