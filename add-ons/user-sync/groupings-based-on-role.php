@@ -3,13 +3,13 @@
 /**
  * Add or remove users with the role "role_1" to the interest group with the ID interest-group-id and "role_2" to interest id "other-interest-group-id".
  */
-add_filter( ‘mailchimp_sync_subscriber_data’, function( $data, $user ) {
-$data->interests[ “interest-group-id” ] = in_array( ‘role_1’, $user->roles );
-$data->interests[ “other-interest-group-id” ] = in_array( ‘role_2’, $user->roles );
-//etc
+add_filter( 'mailchimp_sync_subscriber_data', function( $data, $user ) {
+	$data->interests[ 'interest-group-id' ] = in_array( 'role_1', $user->roles );
+	$data->interests[ 'other-interest-group-id' ] = in_array( 'role_2', $user->roles );
+	//you can repeat this line for more groups / roles.
 
-//finally return the data
-return $data;
+	//finally return the data
+	return $data;
 }, 14, 2 );
 
 
