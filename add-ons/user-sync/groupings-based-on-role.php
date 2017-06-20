@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * Add or remove users with the role "role_1" to the interest group with the ID interest-group-id and "role_2" to interest id "other-interest-group-id".
+ */
+add_filter( ‘mailchimp_sync_subscriber_data’, function( $data, $user ) {
+$data->interests[ “interest-group-id” ] = in_array( ‘role_1’, $user->roles );
+$data->interests[ “other-interest-group-id” ] = in_array( ‘role_2’, $user->roles );
+//etc
+
+//finally return the data
+return $data;
+}, 14, 2 );
+
 
 /**
- * Add or remove users with the "subscriber" role to a group called "Member"
+ * This is another way to do the same thing, for the role "subscriber".
  */
 add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
 
