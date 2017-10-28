@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Insert a sign-up form after the 3rd paragraph.
+ * Insert a sign-up form after the post content.
  */
 add_filter( 'the_content', function( $content ) {
 
