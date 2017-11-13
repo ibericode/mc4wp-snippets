@@ -18,7 +18,7 @@
         }
 
         //set the slug for the box you want to apply this to.
-        var boxzillaSlug = "the-post-slug-of-your-boxzilla-box-goed-here";
+        var boxzillaSlug = "the-post-slug-of-your-boxzilla-box-goes-here";
 
         /**
          * overrides `Box.prototype.toggle()`
