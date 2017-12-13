@@ -3,21 +3,23 @@ Integration slugs
 
 The following integration slugs are used by the MailChimp for WordPress plugin. 
 
+- affiliatewp
 - buddypress
 - contact-form-7
 - custom
 - easy-digital-downloads
+- events-manager
+- gravity-forms
 - memberpress
 - ninja-forms
 - woocommerce
 - wp-comment-form
 - wp-registration-form
+- wpforms
 
-([source](https://github.com/ibericode/mailchimp-for-wordpress/tree/master/integrations))
+[View source](https://github.com/ibericode/mailchimp-for-wordpress/tree/master/integrations)
 
-
-
-You can use these names in the following filter or action hooks.
+You can use these slugs in the following filter or action hooks.
 
 ```php
 mc4wp_integration_{slug}_data
