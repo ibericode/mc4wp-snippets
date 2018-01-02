@@ -38,3 +38,4 @@ add_filter( 'mc4wp_integration_woocommerce_subscriber_data', function( MC4WP_Mai
     return $subscriber;
 });
 ```
+
