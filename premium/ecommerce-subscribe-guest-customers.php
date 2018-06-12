@@ -23,7 +23,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 			public function add_order( $args, $assoc_args = array() ) {
 				if ( empty( $assoc_args['list_id'] ) ) {
 					WP_CLI::error( "Please provide a list_id argument." );
-					
 					return;
 				}
 				
@@ -42,13 +41,12 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 				$guest_orders = $query->get_orders();
 				
 				$total_guest_orders = count( $guest_orders );
-				
 				WP_CLI::log( sprintf( '%d guest orders found.', $total_guest_orders ) );
-				$mailchimp         = new MC4WP_MailChimp();
+
+				$mailchimp = new MC4WP_MailChimp();
 				$mailchimp_list_id = $assoc_args['list_id'];
-				$args              = array(
-					'status' => 'pending',
-					// default: "pending", set to "subscribed" to skip double opt-in (not recommended)
+				$args = array(
+					'status' 		=> 'pending', // default: "pending", set to "subscribed" to skip double opt-in (not recommended)
 				);
 				
 				$progress = \WP_CLI\Utils\make_progress_bar( 'Progress Bar', $total_guest_orders );
@@ -57,7 +55,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 					
 					try {
 						$order = wc_get_order( $order_id );
-						
 						$email_address = $order->get_billing_email();
 						
 						if ( empty( $email_address ) ) {
@@ -74,11 +71,15 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 							continue;
 						}
 						
-						// if not, subscribe this guest
+						// if not already on the list, subscribe this guest customer as a new subscriber
+						$args['merge_fields'] = array(
+							'FNAME' => $order->get_billing_first_name(),
+							'LNAME' => $order->get_billing_last_name(),
+						);
 						$mailchimp->list_subscribe( $mailchimp_list_id, $email_address, $args );
-						
 						$this->get_log()->info( sprintf( 'WP CLI Guest Orders: Subscribed %s', $email_address ) );
 						
+						// increment progress bar
 						$progress->tick();
 					} catch ( Exception $e ) {
 						$this->get_log()->info( sprintf( 'WP CLI Guest Orders: Exception: %s Order ID: %s', $e->getMessage() ) );
