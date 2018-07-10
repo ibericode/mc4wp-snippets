@@ -11,6 +11,8 @@ add_action( 'mc4wp_form_updated_subscriber', function( $form ) {
       return;
    }
 
+   dlm_mailchimp_set_cookie( $form->data['EMAIL'] );
+
    // form was used to update a subscriber; redirect to download
    wp_redirect( 'http://my-site.com/download-url' );
    exit;
