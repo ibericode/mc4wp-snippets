@@ -32,6 +32,6 @@ add_action( 'woocommerce_save_account_details', function($user_id) use ( $mailch
 			)
 		), $update_existing );
 	} else {
-		$mailchimp->list_unsubscribe( $list_id, $user->billing_email );
+		$mailchimp->list_unsubscribe( $mailchimp_list_id, $user->billing_email );
 	}
 });
