@@ -17,9 +17,9 @@ add_action( 'init', function() {
 add_filter( 'mc4wp_integration_woocommerce_data', function( $data ) {
     // cookie name => mailchimp field name
     $map = array(
-        'adid' => 'ADID',
-        'marketer' => 'MARKETER',
-        'publisher' => 'PUBLISHER',
+        'adid' => 'MMERGE9',
+        'marketer' => 'MMERGE7',
+        'publisher' => 'MMERGE8',
     );
 
     foreach( $map as $cookie_name => $mailchimp_field_name ) {
