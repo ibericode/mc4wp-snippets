@@ -2,32 +2,16 @@
 /**
  * This will send additional WooCommerce checkout fields to MailChimp.
  *
- * To add more fields, change the $field_map variable and use the following format:
- *
- *      WooCommerce field => MailChimp field.
- *
- * Example:
- *
- *      "billing_country" => "COUNTRY"
- *
- * This means that the WooCommerce "billing_country" field will be sent to the "COUNTRY" field in MailChimp.
- *
  * @return array
  */
-add_filter( 'mc4wp_integration_woocommerce_data', function( $data ) {
+add_filter( 'mc4wp_integration_woocommerce_data', function( $data, $order_id ) {
+	$order = wc_get_order( $order_id );
 
-    // map of WooCommerce checkout field names => MailChimp field names
-	$field_map = array(
-		'billing_country' => 'COUNTRY',
-		'billing_phone' => 'PHONE',
-	);
+	// this sends the billing_country field from WooCommerce to a Mailchimp field called "BILLING_COUNTRY"
+	$data[ 'BILLING_COUNTRY' ] = $order->get_billing_country();
 
-	foreach( $field_map as $woocommerce_field => $mailchimp_field ) {
-		if( ! empty( $_POST[ $woocommerce_field ] ) ) {
-			$data[ $mailchimp_field ] = sanitize_text_field( $_POST[ $woocommerce_field ] );
-		}
-	}
-
+	// if it's a custom checkout field, usually you can get its value like this:
+	$data[ 'NAME_OF_FIELD_IN_MAILCHIMP' ] = $order->get_meta( 'name_of_field_in_woocommerce', true );
 
 	return $data;
 } );

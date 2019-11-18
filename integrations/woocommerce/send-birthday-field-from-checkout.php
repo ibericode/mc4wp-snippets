@@ -5,9 +5,8 @@
  * 
  * This assumes that the format of the billing_birthdate field is correct.
  */
-add_filter( 'mc4wp_integration_woocommerce_data', function( $data ) {
-    if( ! empty( $_POST['billing_birthdate'] ) ) {
-        $data['MMERGE3'] = $_POST['billing_birthdate'];
-    }
+add_filter( 'mc4wp_integration_woocommerce_data', function( $data, $order_id ) {
+	$order = wc_get_order( $order_id );
+	$data['MMERGE3'] = $order->get_meta( 'billing_birthdate', true );
     return $data;
 });
