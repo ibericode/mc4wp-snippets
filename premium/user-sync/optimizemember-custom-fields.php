@@ -2,8 +2,6 @@
 
 /**
  * This code adds support for custom fields added by OptimizeMember.
- *
- * Please note that this code requires MailChimp Sync v1.3.1 or later.
  */
 add_filter( 'mailchimp_sync_get_user_field', function( $value, $field, $user ) {
 
@@ -16,5 +14,4 @@ add_filter( 'mailchimp_sync_get_user_field', function( $value, $field, $user ) {
 	}
 
 	return $value;
-
 }, 10, 3 );

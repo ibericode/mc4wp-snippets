@@ -1,9 +1,0 @@
-<?php
-
-add_filter( 'mailchimp_sync_should_sync_user', function( $should, $user ) {
-	$groups = bp_get_user_groups( $user->ID );
-
-	// set $should to true if user is part of group with ID "some-group-id" (change to numerical ID)
-   $should = isset( $groups[ 'some-group-id' ] );
-   return $should;
-}, 10, 2);
