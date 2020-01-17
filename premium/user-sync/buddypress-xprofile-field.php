@@ -2,7 +2,7 @@
 
 
 // get field data from a custom BuddyPress field.
-add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
+add_filter( 'mc4wp_user_sync_subscriber_data', function( \MC4WP_MailChimp_Subscriber $subscriber, \WP_User $user ) {
 
     // get meta field, change "buddypress_field_name" to the name of your BuddyPress field.
     $field_value = bp_get_profile_field_data(

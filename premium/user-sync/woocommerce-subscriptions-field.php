@@ -1,7 +1,7 @@
 <?php
 
 // If user has subscription, set the Mailchimp field named "ACTIVE" to "Yes"
-add_filter( 'mailchimp_sync_subscriber_data', function( $subscriber, $user ) {
+add_filter( 'mc4wp_user_sync_subscriber_data', function( $subscriber, $user ) {
 
 	/** @var MC4WP_MailChimp_Subscriber $subscriber */
 	if( WC_Subscriptions_Manager::user_has_subscription( $user->ID ) ) {
