@@ -14,4 +14,4 @@ add_filter( 'mc4wp_integration_woocommerce_data', function( $data, $order_id ) {
 	$data[ 'NAME_OF_FIELD_IN_MAILCHIMP' ] = $order->get_meta( 'name_of_field_in_woocommerce', true );
 
 	return $data;
-} );
+}, 10, 2);

@@ -17,4 +17,4 @@ add_filter( 'mc4wp_ecommerce_order_data', function( $data, $woocommerce_order ) 
     $data['lines'] = array_values( $data['lines'] );
 
    return $data;
-});
+}, 10, 2);

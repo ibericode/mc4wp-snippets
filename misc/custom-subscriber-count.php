@@ -1,3 +1,5 @@
+<?php
+
 add_filter('mc4wp_subscriber_count', function($count, $list_ids) {
    $count = get_transient('guillaume_subscriber_count');
    
