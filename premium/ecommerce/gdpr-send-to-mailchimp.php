@@ -32,11 +32,11 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
     }
 
     //get the list ecommerce
-    $list = $options['store']['list_id'];
+    $mailchimp_list_id = $options['store']['list_id'];
 
 	try {
 	    //Send the request to get the status
-		$list_member = mc4wp_get_api_v3()->get_list_member($list, $email);
+		$list_member = mc4wp_get_api_v3()->get_list_member($mailchimp_list_id, $email);
 	} catch (Exception $e) {
 	    //In case of an exception return false
 		return false;
