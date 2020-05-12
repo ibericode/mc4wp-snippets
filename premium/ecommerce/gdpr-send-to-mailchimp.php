@@ -30,9 +30,9 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
     if (!isset($options['store']['list_id'])) {
         return false;
     }
-    //get the list ecommerce. Make it static becuase
-    $list = $options['store']['list_id'];
 
+    //get the list ecommerce
+    $list = $options['store']['list_id'];
 
 	try {
 	    //Send the request to get the status
