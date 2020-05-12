@@ -81,7 +81,6 @@ add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer
  * @see ecommerce3/includes/class-ecommerce.php#186
  */
 add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $customer) {
-    //WP_user if user is changed
     if (! $customer instanceof WP_User ||
         ! $customer->has_prop('user_email')
     ) {
@@ -94,7 +93,6 @@ add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $cust
 }, 10, 2);
 
 add_filter('mc4wp_ecommerce_send_order_to_mailchimp', function ($value, WC_Order $order) {
-    //If the order
     if ($order->has_shipping_address()) {
         return false;
     }
