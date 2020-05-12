@@ -93,9 +93,8 @@ add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $cust
 }, 10, 2);
 
 add_filter('mc4wp_ecommerce_send_order_to_mailchimp', function ($value, WC_Order $order) {
-    if ($order->has_shipping_address()) {
+    if (! $order->has_billing_address()) {
         return false;
     }
-
 	return mailchimp_list_member_has_status_pending_or_subscribed($order->get_billing_email());
 }, 10, 2);
