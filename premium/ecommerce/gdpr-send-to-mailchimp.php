@@ -12,7 +12,7 @@
  *
  * @param string $email
  *
- * @return bool
+ * @return bool `true` when the mailchimp list member has the status pending or subscribed
  */
 function mailchimp_list_member_has_status_pending_or_subscribed($email) {
 
@@ -28,7 +28,7 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
         return false;
     }
 
-    //get the list ecommerce
+    //Get the list id of mailchimp used in the E-commerce module
     $mailchimp_list_id = $options['store']['list_id'];
 
 	try {
@@ -39,59 +39,79 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
 		return false;
 	}
 
-    //Check the status
+    //Compare the status
 	return in_array($list_member->status, array('subscribed', 'pending'), true);
 }
 
 /**
- * Only is called whe
+ * Extract the email from the stdClass, WP_User or WC_Customer.
+ * The stdClass should contain the property `billing_email`.
  *
- * @param
+ * @param WP_User|WC_Customer|object $customer
+ *
+ * @return string the email address of the customer
  */
-add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer) {
-    $email = null;
-
+function get_customer_email($customer) {
     switch (get_class($customer)) {
         case stdClass::class:
-            $email = $customer->billing_email;
+            if (! isset($customer->billing_email)) {
+                throw new InvalidArgumentException(
+                    "stdClass does not contain a billing_email property"
+                );
+            }
+            return $customer->billing_email;
             break;
         case WP_User::class:
-            $email = $customer->user_email;
-            break;
+            return $customer->user_email;
         case WC_Customer::class:
-            $email = $customer->get_email();
-            break;
+            return $customer->get_email();
     }
 
-    if (! $email) {
-        return false;
-    }
+    throw new InvalidArgumentException(
+        sprintf("get_customer_email() expects to be parameter 1 to be an instance of %s, %s or %s, given %s", stdClass::class, WP_User::class, WC_Customer::class, gettype($customer))
+    );
+}
 
-	return mailchimp_list_member_has_status_pending_or_subscribed($email);
+/**
+ * This filter is applied when a user is not logged in and abort on form fill on the checkout page
+ *
+ * @param bool $value the default value is `true`
+ * @param WP_User|WC_Customer|object $customer
+ *
+ * @return bool whenever the customer is send to mailchimp on `true` will be sent
+ */
+add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer) {
+    $customer_email = get_customer_email($customer);
+
+	return mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
 }, 10, 2);
 
 /**
- * This filter will be called when a client updates his profile.
+ * This filter is applied when a client updates his profile.
  *
- * @param bool $value
+ * @param bool $value the default value is `true`
+ * @param WP_User|WC_Customer|object $customer
  *
- * @see ecommerce3/includes/class-ecommerce.php#186
+ * @return bool whenever the customer is send to mailchimp on `true` will be sent
  */
 add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $customer) {
-    if (! $customer instanceof WP_User ||
-        ! $customer->has_prop('user_email')
-    ) {
-        return false;
-    }
+    $customer_email = get_customer_email($customer);
 
-	return mailchimp_list_member_has_status_pending_or_subscribed(
-	    $customer->get('user_email')
-    );
+	return mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
 }, 10, 2);
 
+/**
+ * This filter is applied before a order is sent to Mailchimp
+ *
+ * @param bool $value the default value is `true`
+ * @param WC_Order $order
+ *
+ * @return bool
+ */
 add_filter('mc4wp_ecommerce_send_order_to_mailchimp', function ($value, WC_Order $order) {
     if (! $order->has_billing_address()) {
         return false;
     }
+
 	return mailchimp_list_member_has_status_pending_or_subscribed($order->get_billing_email());
 }, 10, 2);
