@@ -14,7 +14,7 @@
  *
  * @return bool `true` when the mailchimp list member has the status pending or subscribed
  */
-function mailchimp_list_member_has_status_pending_or_subscribed($email) {
+function mc4wp_mailchimp_list_member_has_status_pending_or_subscribed($email) {
 
 	if(!is_string($email)) {
 		throw new InvalidArgumentException(
@@ -51,7 +51,7 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
  *
  * @return string the email address of the customer
  */
-function get_customer_email($customer) {
+function mc4wp_get_customer_email($customer) {
     switch (get_class($customer)) {
         case stdClass::class:
             if (! isset($customer->billing_email)) {
@@ -81,9 +81,9 @@ function get_customer_email($customer) {
  * @return bool whenever the customer is send to mailchimp on `true` it will be send
  */
 add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer) {
-    $customer_email = get_customer_email($customer);
+    $customer_email = mc4wp_get_customer_email($customer);
 
-	return mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
+	return mc4wp_mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
 }, 10, 2);
 
 /**
@@ -95,9 +95,9 @@ add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer
  * @return bool whenever the customer is send to mailchimp on `true` it will be send
  */
 add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $customer) {
-    $customer_email = get_customer_email($customer);
+    $customer_email = mc4wp_get_customer_email($customer);
 
-	return mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
+	return mc4wp_mailchimp_list_member_has_status_pending_or_subscribed($customer_email);
 }, 10, 2);
 
 /**
@@ -113,5 +113,5 @@ add_filter('mc4wp_ecommerce_send_order_to_mailchimp', function ($value, WC_Order
         return false;
     }
 
-	return mailchimp_list_member_has_status_pending_or_subscribed($order->get_billing_email());
+	return mc4wp_mailchimp_list_member_has_status_pending_or_subscribed($order->get_billing_email());
 }, 10, 2);
