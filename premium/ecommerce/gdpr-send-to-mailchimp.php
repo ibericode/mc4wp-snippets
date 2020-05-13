@@ -22,10 +22,6 @@ function mailchimp_list_member_has_status_pending_or_subscribed($email) {
 		);
 	}
 
-    if(!mc4wp()->has('ecommerce.options')) {
-        return false;
-    }
-
     $options = mc4wp('ecommerce.options');
 
     if (!isset($options['store']['list_id'])) {
