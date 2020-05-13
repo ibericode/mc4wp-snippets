@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Example how only send data to mail chimp if has the status `subscribed` or `pending`.
+ * Code snippet to send the customer to mailchimp if they have only the status pending or subscribed
  */
 
 /**
@@ -78,7 +78,7 @@ function get_customer_email($customer) {
  * @param bool $value the default value is `true`
  * @param WP_User|WC_Customer|object $customer
  *
- * @return bool whenever the customer is send to mailchimp on `true` will be sent
+ * @return bool whenever the customer is send to mailchimp on `true` it will be send
  */
 add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer) {
     $customer_email = get_customer_email($customer);
@@ -92,7 +92,7 @@ add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer
  * @param bool $value the default value is `true`
  * @param WP_User|WC_Customer|object $customer
  *
- * @return bool whenever the customer is send to mailchimp on `true` will be sent
+ * @return bool whenever the customer is send to mailchimp on `true` it will be send
  */
 add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $customer) {
     $customer_email = get_customer_email($customer);
@@ -106,7 +106,7 @@ add_filter('mc4wp_ecommerce_send_customer_to_mailchimp', function ($value, $cust
  * @param bool $value the default value is `true`
  * @param WC_Order $order
  *
- * @return bool
+ * @return bool whenever the customer is send to mailchimp on `true` it will be send
  */
 add_filter('mc4wp_ecommerce_send_order_to_mailchimp', function ($value, WC_Order $order) {
     if (! $order->has_billing_address()) {
