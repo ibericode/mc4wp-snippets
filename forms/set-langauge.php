@@ -4,7 +4,7 @@ The value send in should be 2 letter lower case language code.
 
 Example code to add to the form:
 
-<select name="lanugage">
+<select name="language">
 <option value='en'>English</option>
 <option value='nl'>Dutch</option>
 <option value='de'>German</option>
