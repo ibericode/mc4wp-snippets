@@ -46,7 +46,6 @@ _Example_
 add_filter( 'mc4wp_integration_ninja-forms_lists', function() {
 	return array("f2415574a4","bd0c7cefa9","a53c0bf8e5");
 });
-});
 ```
 
 _Example_
