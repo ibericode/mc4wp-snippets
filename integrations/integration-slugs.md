@@ -55,3 +55,19 @@ add_filter( 'mc4wp_integration_woocommerce_checkbox_attributes', function() {
 	return array("data-example" => "value-example","data-example2" => "value2");
 });
 ```
+
+_Example_
+
+```php
+add_filter( 'mc4wp_integration_contact-form-7_before_checkbox_wrapper', function() {
+	echo "<p>Some HTML before the checkbox.</p>";
+});
+```
+
+_Example_
+
+```php
+add_filter( 'mc4wp_integration_contact-form-7_after_checkbox_wrapper', function() {
+	echo "<p>Some HTML code after the checkbox</p>";
+});
+```
