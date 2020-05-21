@@ -39,3 +39,20 @@ add_filter( 'mc4wp_integration_woocommerce_subscriber_data', function( MC4WP_Mai
 });
 ```
 
+_Example_
+
+```php
+//Replace the IDs with your own list ids from MailChimp for WP > MailChimp
+add_filter( 'mc4wp_integration_ninja-forms_lists', function() {
+	return array("f2415574a4","bd0c7cefa9","a53c0bf8e5");
+});
+});
+```
+
+_Example_
+
+```php
+add_filter( 'mc4wp_integration_woocommerce_checkbox_attributes', function() {
+	return array("data-example" => "value-example","data-example2" => "value2");
+});
+```
