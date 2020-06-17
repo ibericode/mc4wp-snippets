@@ -16,6 +16,6 @@ add_filter( 'mc4wp_ecommerce_product_data', function( $data, $product ) {
 		'Test1', 'Test2', 'Test3'
 	);
 	$single_category = array_intersect(explode('|', $data['vendor']), $priority_categories);
-	$data['vendor'] = (count($single_category) < 1) ? $single_category[0] = $categories[0] : reset($single_category);
+	$data['vendor'] = (count($single_category) < 1) ? $single_category[0] : reset($single_category);
 	return $data;
 }, 10, 2); 
