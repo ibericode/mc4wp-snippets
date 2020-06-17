@@ -13,9 +13,14 @@ You can keep adding to that list.
 
 add_filter( 'mc4wp_ecommerce_product_data', function( $data, $product ) {
 	$priority_categories = array(
-		'Test1', 'Test2', 'Test3'
+		'Test1',
+		'Test2',
+		'Test3'
 	);
-	$single_category = array_intersect(explode('|', $data['vendor']), $priority_categories);
-	$data['vendor'] = (count($single_category) < 1) ? $single_category[0] : reset($single_category);
+	$single_category = array();
+	$categories = explode('|', $data['vendor']);
+	$single_category = array_intersect($categories, $priority_categories);
+	if(count($single_category) < 1) $single_category[0] = $categories[0];
+	$data['vendor'] = current($single_category);
 	return $data;
 }, 10, 2); 
