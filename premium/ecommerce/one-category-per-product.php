@@ -17,10 +17,21 @@ add_filter( 'mc4wp_ecommerce_product_data', function( $data, $product ) {
 		'Test2',
 		'Test3'
 	);
+	
+	if (empty($data['vendor'])) {
+		return $data;
+	}
+	
 	$single_category = array();
 	$categories = explode('|', $data['vendor']);
 	$single_category = array_intersect($categories, $priority_categories);
-	if(count($single_category) < 1) $single_category[0] = $categories[0];
-	$data['vendor'] = current($single_category);
+	
+	
+	if (count($single_category) > 0) {
+		$data['vendor'] = reset($single_category);
+	} else {
+		$data['vendor'] = $categories[0];
+	}
+	
 	return $data;
 }, 10, 2); 
