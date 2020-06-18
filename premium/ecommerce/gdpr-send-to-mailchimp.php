@@ -5,7 +5,7 @@
  */
 
 /**
- * Check if a list member has status pending or subscribed based on there email.
+ * Check if a list member has status pending or subscribed based on their email.
  * It uses the list from the page MC4WP > E-commerce
  *
  * @see https://mailchimp.com/developer/reference/lists/list-members/
