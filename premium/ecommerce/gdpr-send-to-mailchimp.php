@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Code snippet to send the customer to mailchimp if they have only the status pending or subscribed
+ * Only send the customer to Mailchimp if they have status pending or subscribed (no transactional only emails)
  */
 
 /**
@@ -28,7 +28,7 @@ function mc4wp_mailchimp_list_member_has_status_pending_or_subscribed($email) {
         return false;
     }
 
-    //Get the list id of mailchimp used in the E-commerce module
+    //Get the list id from mailchimp used in the E-commerce module
     $mailchimp_list_id = $options['store']['list_id'];
 
 	try {
@@ -87,7 +87,7 @@ add_filter('mc4wp_ecommerce_send_cart_to_mailchimp', function ($value, $customer
 }, 10, 2);
 
 /**
- * This filter is applied when a client updates his profile.
+ * This filter is applied when a client updates their profile.
  *
  * @param bool $value the default value is `true`
  * @param WP_User|WC_Customer|object $customer
