@@ -7,7 +7,7 @@ However, for the new Ecommerce Product Follow-up by Category you probabaly want 
 This code snippet will let you create a list of categories ordered by priorituy. Only the first match will be send to MailChimp.
 If no match is found, the first alphabetical category will be send in for that product. 
 
-Replace Test1, Test2, Test3 with the categories you want to send in, higest priority on top. 
+Replace Test1, Test2, Test3 with the categorie *names* (not slugs) you want to send in, higest priority on top. 
 You can keep adding to that list.
 */
 
