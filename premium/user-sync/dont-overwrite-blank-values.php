@@ -1,3 +1,4 @@
+<?php
 // By default, if a field in Wordpress is empty it will send this empty value to MailChimp, 
 // possibly overwriting the field if it did have some data in it in the MailChimp audience. 
 // This code will stop UserSync from sending in Empty values so that if a field has no value
