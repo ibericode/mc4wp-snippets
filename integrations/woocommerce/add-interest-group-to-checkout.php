@@ -1,3 +1,5 @@
+<?php
+
 // stop outputting default plugin checkbox
 add_filter( 'mc4wp_integration_show_checkbox', function( $show, $integration_slug ) {
 	if( $integration_slug == 'woocommerce' ) { return false; }
