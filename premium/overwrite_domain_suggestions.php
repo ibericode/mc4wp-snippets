@@ -1,3 +1,4 @@
+<?php
 /*
 With the form setting "Enable autocomplete for email domains?" is set to Yes, domain name automcompletions are suggested when typing an email address into the email field of the form. 
 
