@@ -1,1 +1,0 @@
-### Snippets specific to [MailChimp Top Bar](https://mc4wp.com/add-ons/mailchimp-top-bar/)

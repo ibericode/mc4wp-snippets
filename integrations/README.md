@@ -1,1 +1,0 @@
-### Checkbox-integrations related snippets
